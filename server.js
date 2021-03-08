@@ -28,11 +28,17 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
-//Redirect to home.
-// app.get('*', (req, res) =>
-// {
-//     res.redirect('/home');
-// });
+//Gets the css.
+app.get("/assets/css/styles.css", (req, res) =>
+{
+    res.sendFile(path.join(__dirname, "/public/assets/css/styles.css"));
+});
+
+//Gets the javascript.
+app.get("/assets/js/index.js", (req, res) =>
+{
+    res.sendFile(path.join(__dirname, "/public/assets/js/index.js"));
+});
 
 //Get api notes
 app.get('/api/notes', (req, res) =>
@@ -51,6 +57,12 @@ app.post('/api/notes', (req, res) =>
     //Save it.
     fs.writeFileSync("./db/db.json", JSON.stringify(db));
     res.json(true);
+});
+
+//Redirect to home.
+app.get('*', (req, res) =>
+{
+    res.redirect('/home');
 });
 
 /* Server Start */
