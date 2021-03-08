@@ -9,6 +9,8 @@ const fs = require("fs");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+let idIndex = 1;
+
 /* Required express stuff. */
 
 app.use(express.urlencoded({ extended: true }));
@@ -52,11 +54,26 @@ app.post('/api/notes', (req, res) =>
 {
     //Get it
     const db = JSON.parse(fs.readFileSync("./db/db.json"));
-    //Change it
-    db.push(req.body);
+    //Make it
+    const note = {
+        id: idIndex++,
+        title: req.body.title,
+        text: req.body.text
+    };
+    //Push it.
+    db.push(note);
     //Save it.
     fs.writeFileSync("./db/db.json", JSON.stringify(db));
     res.json(true);
+});
+
+//Delete api for a note by id.
+app.delete("/api/notes/:id", (req, res) =>
+{
+    const db = JSON.parse(fs.readFileSync("./db/db.json"));
+    db.splice(db.findIndex(element => element.id == req.params.id), 1);
+    fs.writeFileSync("./db/db.json", JSON.stringify(db));
+    res.end();
 });
 
 //Redirect to home.
