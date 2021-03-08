@@ -2,6 +2,7 @@
 
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 /* Variables */
 
@@ -28,21 +29,25 @@ app.get('/notes', (req, res) =>
 });
 
 //Redirect to home.
-app.get('*', (req, res) =>
-{
-    res.redirect('/home');
-});
+// app.get('*', (req, res) =>
+// {
+//     res.redirect('/home');
+// });
 
 //Get api notes
 app.get('/api/notes', (req, res) =>
 {
-    //TODO
+    const db = JSON.parse(fs.readFileSync("./db/db.json"));
+    res.json(db);
 });
 
 //Post api notes
 app.post('/api/notes', (req, res) =>
 {
-    //TODO
+    const db = JSON.parse(fs.readFileSync("./db/db.json"));
+    db.push(req.body);
+    fs.writeFileSync("./db/db.json", JSON.stringify(db));
+    res.json(true);
 });
 
 /* Server Start */
