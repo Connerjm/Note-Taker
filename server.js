@@ -44,8 +44,11 @@ app.get('/api/notes', (req, res) =>
 //Post api notes
 app.post('/api/notes', (req, res) =>
 {
+    //Get it
     const db = JSON.parse(fs.readFileSync("./db/db.json"));
+    //Change it
     db.push(req.body);
+    //Save it.
     fs.writeFileSync("./db/db.json", JSON.stringify(db));
     res.json(true);
 });
