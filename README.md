@@ -8,12 +8,18 @@
 ## Table of Contents
 
 - [Description](#description)
+- [Deployment](#deployment)
 - [Features](#features)
 - [License](#license)
 
 ## Description
 
 This application will allow a user to create, edit, and delete notes which are saved in a simulated database which is stored server-side. The front end code is supplied for the assignment and I built the backend utilizing an express.js server to save and read from a JSON file.
+
+## Deployment
+
+- [Live on Heroku](https://quiet-sierra-83431.herokuapp.com/home)
+- [GitHub Repo](https://github.com/Connerjm/Note-Taker)
 
 ## Features
 
